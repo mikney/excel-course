@@ -1,0 +1,22 @@
+{
+  "name": "excel-course",
+  "version": "1.0.0",
+  "description": "JavaScript Application Excel",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikney/excel-course.git"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "Genadii Bukin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikney/excel-course/issues"
+  },
+  "homepage": "https://github.com/mikney/excel-course#readme"
+}
