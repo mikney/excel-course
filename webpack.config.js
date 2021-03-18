@@ -1,12 +1,13 @@
+// import webpack from "webpack";
+
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin')
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
-
 
 const jsLoaders = () => {
     const loaders = [
@@ -16,16 +17,18 @@ const jsLoaders = () => {
                 presets: ['@babel/preset-env']
             }
         }
-    ]
+    ];
 
-    if (isDev) {
-        loaders.push('eslint-loader')
-    }
+    // if (isDev) {
+    //     loaders.push('eslint-loader')
+    //     plugins.push(new webpack.HotModuleReplacementPlugin());
+    // }
 }
 
 const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`
 
 module.exports = {
+    target: process.env.NODE_ENV === "development" ? "web" : "browserslist",
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     entry: ['@babel/polyfill','./index.js'],
@@ -64,7 +67,8 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: filename('css')
-        })
+        }),
+        // new webpack.HotModuleReplacementPlugin()
     ],
     module: {
         rules: [
@@ -74,12 +78,13 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            hmr: isDev,
-                            reloadAll: true
+                            // hmr: isDev
+                            // // reloadAll: true
+                            // hot: isDev
                         }
                     },
-                    "css-loader",
-                    "sass-loader",
+                    'css-loader',
+                    'sass-loader',
                 ],
             },
             {
