@@ -16,6 +16,7 @@ class Dom {
     return this
   }
   on(eventType, callback) {
+    // console.log(eventType === 'mousemove')
     this.$el.addEventListener(eventType, callback)
   }
   off(eventType, callback) {
@@ -32,6 +33,24 @@ class Dom {
     }
     return this
   }
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+  get data() {
+    return this.$el.dataset
+  }
+  getCoords() {
+    return this.$el.getBoundingClientRect()
+  }
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+  css(styles= {}) {
+    Object.keys(styles).forEach(styless => {
+      this.$el.style[styless] = styles[styless]
+    })
+    // styles.width && this.$el.style = styles.width
+  }
 }
 $('div').html('<h1></h1>')
 export function $(selector) {
@@ -42,6 +61,5 @@ $.create = (tagName, classes = '') => {
   if (classes) {
     el.classList.add(classes)
   }
-  console.log(el)
   return $(el)
 }
