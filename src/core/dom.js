@@ -11,9 +11,24 @@ class Dom {
     }
     return this.$el.outerHTML.trim()
   }
+
+  text(text) {
+    if ( typeof text === 'string') {
+      this.$el.textContent = text
+      return this
+    }
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim()
+    }
+    return this.$el.textContent.trim()
+  }
+
   clear() {
     this.html('')
     return this
+  }
+  find(selector) {
+    return $(this.$el.querySelector(selector))
   }
   on(eventType, callback) {
     // console.log(eventType === 'mousemove')
@@ -21,6 +36,17 @@ class Dom {
   }
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback)
+  }
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':')
+
+      return {
+        row: +parsed[0],
+        col: +parsed[1]
+      }
+    }
+    return this.data.id
   }
   append(node) {
     if (node instanceof Dom) {
@@ -50,6 +76,14 @@ class Dom {
       this.$el.style[styless] = styles[styless]
     })
     // styles.width && this.$el.style = styles.width
+  }
+  addClass(className) {
+    this.$el.classList.add(className)
+    return this
+  }
+  removeClass(className) {
+    this.$el.classList.remove(className)
+    return this
   }
 }
 $('div').html('<h1></h1>')
