@@ -19,12 +19,16 @@ export function matrix($target, $current) {
     return acc
   }, [])
 }
-export function keyPress(row, col, instance, e) {
+export function keyPress(row, col, instance, e, fn) {
+  //console.log(row, col, instance, e, fn)
   if (row +1 && col +1) {
     e.preventDefault()
     const cell = instance.$root.find(`[data-id="${row}:${col}"]`)
+    //console.log(fn.call(instance, cell)())
+    fn(cell)
     instance.selection.select(cell)
-    instance.selection.current.$el.focus()
+    console.log('Rabotaet')
+    cell.$el.focus()
     instance.$emit('table:select', instance.selection.current)
   }
 }
